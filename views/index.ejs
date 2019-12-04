@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Chatter </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid h-100 px-0">
+        <div class="hat navbar">
+            Chttr
+            <section>
+                <div>
+                    <label for="username"> Login </label>
+                    <input class="l-p" id="username" type="text" />
+                    <label for="password"> Password </label>
+                    <input class="l-p" type="password" id="password" type="text" />
+                    <button class="button log-btn" id="send_username"> Log in </button>
+                </div>
+            </section>
+        </div>
+        <section class="text-wrap text-break container h-75 chat my-2" id="chatroom">
+            <section id="feedback"></section>
+        </section>
+        <section class="input d-flex" id="m_input">
+            <input class="w-100 input-text d-inline-block input-text" id="message" class="align-bottom" type="text" />
+            <button id="send_message" class=" d-inline-block send-btn" type="button"> Send</button>
+        </section>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="chat.js"></script>
+</body>
+
+</html>
