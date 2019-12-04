@@ -1,7 +1,7 @@
 
 
 $(function conn(){
-	var socket = io.connect('http://localhost:3000');
+	var socket = io.connect();
 
 	var message = $("#message");
 	var username = $("#username");
