@@ -29,13 +29,13 @@ $(function conn(){
 				}
 			}
 		}
-	 		document.getElementById('password').value = '';
-	 		document.getElementById('username').value = '';
+	 		// document.getElementById('password').value = '';
+	 		// document.getElementById('username').value = '';
 	});
 
 	send_message.click(function(){
 		var date = new Date();
-		var time = date.getHours() + ":" + date.getMinutes();
+		var time = (date.getHours() < 10 ? '0' : '') + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
 		// console.log(message.val());
 		socket.emit('new_message', {
 			message: message.val(),
