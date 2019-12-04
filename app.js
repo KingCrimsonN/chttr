@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+const port = process.env.PORT || 8000;
+
 const db_url = "mongodb+srv://Mike_stavr:<password>@chttr-owvzb.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose.connect(db_url, function(err){
@@ -18,7 +20,7 @@ app.get('/', function(req,res){
 	res.render('index');
 })
 
-server = app.listen(3000);
+server = app.listen(port);
 
 const io = require("socket.io")(server);
 
