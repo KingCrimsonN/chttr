@@ -17,23 +17,25 @@
             Chttr
             <section>
                 <div>
-                    <label for="username"> Login </label>
-                    <input class="l-p" id="username" type="text" />
-                    <label for="password"> Password </label>
-                    <input class="l-p" type="password" id="password" type="text" />
+                    <label for="username"> Username </label>
+                    <input class="l-p" id="username" value="Anon" type="text" />
+                  <!--   <label for="password"> Password </label>
+                    <input class="l-p" type="password" id="password" type="text" /> -->
                     <button class="button log-btn" id="send_username"> Log in </button>
                 </div>
             </section>
         </div>
         <section class="text-wrap text-break container h-75 chat my-2" id="chatroom">
-            <section id="feedback"></section>
         </section>
         <section class="input d-flex" id="m_input">
             <input class="w-100 input-text d-inline-block input-text" id="message" class="align-bottom" type="text" />
             <button id="send_message" class=" d-inline-block send-btn" type="button"> Send</button>
         </section>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
     <script src="chat.js"></script>
 </body>
 

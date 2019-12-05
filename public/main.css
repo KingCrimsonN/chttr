@@ -34,6 +34,7 @@ html,body{
     /*height: 30%;*/
     background-color:#ccc;
     overflow:scroll;
+    scroll-behavior: smooth;
 }
 
 .input{
