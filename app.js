@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 app.set('view engine', 'ejs');
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 var Message = mongoose.model('Messages', {
     username: String,
