@@ -51,10 +51,6 @@ app.post("/messages", async (req, res) => {
 
 server = app.listen(port);
 
-
-
-
-
 const io = require("socket.io")(server);
 
 io.on('connection', function(socket) {
@@ -71,7 +67,20 @@ io.on('connection', function(socket) {
     socket.on('new_message', function(data) {
         io.sockets.emit('new_message', { message: data.message, time: data.time, username: socket.username });
     })
+
+    socket.on('remove_message', function(data){
+        if (admin()){
+            Message.findOneAndDelete({id:data.id});
+        }
+    })
+
+    function admin(){
+        if (password == "sys_adm_flvsy!#")
+            return true;
+        return false;
+    }
 })
+
 
 // io.on('disconection', function(socket){
 // 	console.log('User disconnected');
