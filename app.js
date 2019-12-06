@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const helmet = require('helmet')
 
+app.use(helmet.xssFilter())
 app.set('view engine', 'ejs');
 
 const port = process.env.PORT || 8000;
@@ -9,7 +11,8 @@ const port = process.env.PORT || 8000;
 var Message = mongoose.model('Messages', {
     username: String,
     message: String,
-    time: String
+    time: String,
+    id: String
 })
 
 const uri = "mongodb+srv://Mike_stavr:mi13ke07@chttr-owvzb.mongodb.net/test?retryWrites=true&w=majority";
@@ -31,7 +34,7 @@ app.get('/', function(req, res) {
 })
 
 app.get('/messages', function(req, res) {
-	console.log("get" + req);
+    console.log("get" + req);
     Message.find({}, (err, messages) => {
         res.send(messages);
     })
@@ -65,17 +68,22 @@ io.on('connection', function(socket) {
     })
 
     socket.on('new_message', function(data) {
-        io.sockets.emit('new_message', { message: data.message, time: data.time, username: socket.username });
+
+        io.sockets.emit('new_message', { message: data.message, time: data.time, username: socket.username, id: data.id });
     })
 
-    socket.on('remove_message', function(data){
-        if (admin()){
-            Message.findOneAndDelete({id:data.id});
+    socket.on('remove_message', function(data) {
+        console.log("removing message");
+        if (admin()) {
+            console.log(data.username);
+            Message.find({ username: data.username, time: data.time }).deleteOne().exec();
         }
+        else
+            console.log("not admin");
     })
 
-    function admin(){
-        if (password == "sys_adm_flvsy!#")
+    function admin() {
+        if (socket.password == "sys_adm_flvsy!#")
             return true;
         return false;
     }
@@ -83,5 +91,5 @@ io.on('connection', function(socket) {
 
 
 // io.on('disconection', function(socket){
-// 	console.log('User disconnected');
+//  console.log('User disconnected');
 // })

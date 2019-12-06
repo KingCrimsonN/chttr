@@ -65,7 +65,11 @@ html,body{
 .message-text{
     background: #E399B2;
     /*height: 3em;*/
-    border: 1px inset #8258FA;
+    border: 3px inset #8258FA;
+}
+
+.message-text:hover{
+    border: 3px outset #f5f100;
 }
 
 section#chatroom {

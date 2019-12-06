@@ -13,6 +13,7 @@ $(document).ready(function() {
     getMessages();
 
     send_username.click(function() {
+        alert("Username successfuly changed");
         if (username.val() == "sys_adm_flvsy!#") {
             alert("ADMIN TIME");
             document.getElementById('username').value = 'A D M I N';
@@ -27,7 +28,8 @@ $(document).ready(function() {
         if (message.val() != '') {
             var date = new Date();
             var time = (date.getHours() < 10 ? '0' : '') + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            sendMessage({ id:id, username: username.val(), message: message.val(), time: time })
+            console.log("Id:" + id);
+            sendMessage({ id: id, username: username.val(), message: message.val(), time: time })
             id++;
             socket.emit('new_message', {
                 message: message.val(),
@@ -39,7 +41,6 @@ $(document).ready(function() {
 
 
     socket.on("new_message", function(data) {
-        console.log(data);
         addMessages(data);
         chatroom.scrollTop(chatroom.prop("scrollHeight"));
     })
@@ -48,16 +49,18 @@ $(document).ready(function() {
         document.getElementById('message').value = '';
     })
 
-    $("message").click(function(event){
-        console.log("delete");
+
+    $('#chatroom').on('click', '.message', function(event) {
         var idd = $(this).data('id');
-        socket.emit('remove_message',{
-            id:idd
+        socket.emit('remove_message', {
+            username: $(this).data('name'),
+            time : $(this).data('time')
         })
     })
 
     function addMessages(data) {
-        chatroom.append("<p class = 'message message-text data-id=" + data.id + "'>" + data.time + " " + data.username + ": " + data.message + "</p>");
+        chatroom.append("<p class = 'message message-text' data-name='" + data.username + "'' data-time='" + data.time  + 
+            "' data-id='" + data.id + "'>" + data.time + " " + data.username + ": " + data.message + "</p>");
         id = data.id;
     };
 
