@@ -28,7 +28,6 @@ $(document).ready(function() {
         if (message.val() != '') {
             var date = new Date();
             var time = (date.getHours() < 10 ? '0' : '') + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            console.log("Id:" + id);
             sendMessage({ id: id, username: username.val(), message: message.val(), time: time })
             id++;
             socket.emit('new_message', {
@@ -59,14 +58,18 @@ $(document).ready(function() {
     })
 
     function addMessages(data) {
-        chatroom.append("<p class = 'message message-text' data-name='" + data.username + "'' data-time='" + data.time  + 
-            "' data-id='" + data.id + "'>" + data.time + " " + data.username + ": " + data.message + "</p>");
+        $('<p>').addClass('message message-text').attr({
+            'data-name': data.username,
+            'data-time': data.time,
+            'data-id': data.id,
+        }).text(data.time + " " + data.username + ": " + data.message).appendTo(chatroom);
+        // chatroom.append("<p class = 'message message-text' data-name='" + data.username + "'' data-time='" + data.time  + 
+        //     "' data-id='" + data.id + "'>" + data.time + " " + data.username + ": " + data.message + "</p>");
         id = data.id;
     };
 
     function getMessages() {
         $.get('/messages', function(data) {
-            console.log(data);
             data.forEach(addMessages);
             $("#chatroom").scrollTop($("#chatroom").prop("scrollHeight"));
         })

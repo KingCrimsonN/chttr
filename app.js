@@ -73,9 +73,9 @@ io.on('connection', function(socket) {
     })
 
     socket.on('remove_message', function(data) {
-        console.log("removing message");
+        console.log("removing message...");
         if (admin()) {
-            console.log(data.username);
+            console.log("removing successful");
             Message.find({ username: data.username, time: data.time }).deleteOne().exec();
         }
         else
